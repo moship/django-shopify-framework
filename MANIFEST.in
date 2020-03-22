@@ -1,0 +1,6 @@
+include LICENSE
+include README.rst
+recursive-include shopify_framework/static *
+recursive-include shopify_framework/templates *
+recursive-include docs *
+prune shopify_framework/static/editable/node_modules

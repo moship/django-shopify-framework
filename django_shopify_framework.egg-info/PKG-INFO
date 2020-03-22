@@ -1,0 +1,47 @@
+Metadata-Version: 2.1
+Name: django-shopify-framework
+Version: 1.0.1
+Summary: A Django app to build shopify embed apps.
+Home-page: https://moship.io/
+Author: Moship
+Author-email: opensource@moship.io
+License: BSD-3-Clause  # Example license
+Description: ========================
+        Django Shopify Framework
+        ========================
+        
+        Shopify Framework is a Django app that help you create an embed app.
+        use Django sessions to store the authenticated app, help you create 
+        and authenticate Web Hooks and give you an interface to interact with
+        the Rest Api or the Graph Api resources.
+        
+        Quick start
+        -----------
+        
+        1. Add this information to your settings.py file::
+        
+            SHOPIFY_FRAMEWORK_AUTH_SECRET=""
+            SHOPIFY_FRAMEWORK_APP_API_KEY=""
+            SHOPIFY_FRAMEWORK_APP_API_SECRET_KEY=""
+            SHOPIFY_FRAMEWORK_APP_ROOT_URL=""
+            SHOPIFY_FRAMEWORK_APP_REDIRECT_URL=""
+            SHOPIFY_FRAMEWORK_APP_SCOPES=[
+                ...scopes required,
+            ]
+        
+            SESSION_COOKIE_SAMESITE=None
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Description-Content-Type: text/x-rst
