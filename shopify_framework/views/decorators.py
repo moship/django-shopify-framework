@@ -8,13 +8,23 @@ def embed_view(view_func):
     """
 
     def is_shop_authenticated(request):
-        SHOP_KEY = "shopify_framework_shop"
+        SHOP_KEY = 'shopify_framework_shop'
+        CODE_KEY = 'shopify_framework_code'
 
         if 'code' in request.GET:
 
             shop = AuthShop.objects.get_by_shop_url(shop=request.GET['shop'])
-            if shop.code_is_valid(request):
+            stored_code = request.session.get(CODE_KEY)
+            received_code = request.GET.get('code', 'no-code')
+
+            if stored_code == received_code and request.session.get(SHOP_KEY):
+
+                shop = AuthShop.objects.get(subdomain=request.session[SHOP_KEY])
+                return shop, True
+
+            elif shop.code_is_valid(request):
                 request.session[SHOP_KEY] = shop.subdomain
+                request.session[CODE_KEY] = request.GET['code']
                 return shop, True
 
         elif 'shop' in request.GET:
@@ -47,6 +57,7 @@ def embed_view(view_func):
         resp['Content-Security-Policy'] = 'frame-ancestors *.myshopify.com'
         
         return resp
+    
     return wraps(view_func)(wrapped_view)
 
     

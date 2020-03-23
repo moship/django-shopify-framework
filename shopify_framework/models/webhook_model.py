@@ -92,7 +92,7 @@ class WebHook(models.Model):
         return url
 
     def delete(self, *args, **kwargs):
-        response = self.delete_remote()
+        self.delete_remote()
         return super(WebHook, self).delete(*args, **kwargs)
 
     def save(self, *args, **kwargs):
@@ -104,7 +104,6 @@ class WebHook(models.Model):
                 raise Exception(message)
             else:
                 self.rest_id = response.json()['webhook']['id']
-        
 
         return super(WebHook, self).save(*args, **kwargs)
 

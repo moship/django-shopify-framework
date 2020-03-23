@@ -27,7 +27,7 @@ class AuthShop(models.Model):
     subdomain = models.CharField(default="", max_length=50)
     app_type = models.CharField(
         default="public", max_length=50,choices=APP_TYPES)
-    access_token = models.CharField(default="", max_length=200)
+    access_token = models.CharField(default="", max_length=200, blank=True)
     custom_app_api_key = models.CharField(  
         default="", max_length=200, blank=True, null=True)
     custom_app_api_secret_key = models.CharField(
@@ -37,18 +37,17 @@ class AuthShop(models.Model):
 
     def __init__(self, *args, **kwargs):
 
-        instance =  super(AuthShop, self).__init__(*args, **kwargs)
+        super(AuthShop, self).__init__(*args, **kwargs)
 
         if self.subdomain and self.access_token:
-            self.remote = AuthShopRemote(self.subdomain, 
-                                         self.get_access_token())
-
-        return instance
+            self.remote = AuthShopRemote(
+                self.subdomain, self.get_access_token())
 
     def set_access_token(self, access_token):
         if access_token:
             self.access_token = encrypt(access_token)
             self.save()
+            self.remote = AuthShopRemote(self.subdomain, access_token)
 
     def get_access_token(self):
         return decrypt(self.access_token)
